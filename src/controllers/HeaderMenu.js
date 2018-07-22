@@ -50,9 +50,9 @@ class HeaderMenu extends Component {
         const tabs = this.state.tabs.map((tab, index) => {
             return (
                 <Tab 
-                    isSelected={this.state.tabs[index].isSelected}
-                    value={this.state.tabs[index].name}
-                    key={this.state.tabs[index].name}
+                    isSelected={tab.isSelected}
+                    value={tab.name}
+                    key={tab.name}
                     onClick={() => this.setSelected(index)}
                 />
             )
