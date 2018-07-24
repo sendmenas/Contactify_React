@@ -10,26 +10,27 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: null,
+            items: [],
             itemsReceived: false,
         }
     }
     
     setDataItems(data) {
-        console.log(data);
         this.setState({
             items: data,
+            itemsReceived: true,
         });
-        console.log(this.state.items);
     }
     
     render() {
         let isLoaded = this.state.itemsReceived;
+        let items = this.state.items;
 
         return (
             <div className='page'>
                 <Header />
                 <Main 
+                    items={items}
                     loaded={isLoaded}
                 />
                 <Footer 
