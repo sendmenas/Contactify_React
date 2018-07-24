@@ -1,0 +1,23 @@
+.filter-button {
+    align-items: center;
+    border: 2px solid #5C9398;
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    height: 36px;
+    justify-content: center;
+    margin-right: 28px;
+    width: 106px;
+}
+.filter-button:active {
+    transform: scale(0.95);
+}
+.filter-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+  
+  
