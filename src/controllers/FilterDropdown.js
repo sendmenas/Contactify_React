@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import '../css/FilterDropdown.css';
 
 class FilterDropdown extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="filter-city" id="cityFilter">

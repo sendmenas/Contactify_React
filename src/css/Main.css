@@ -10,26 +10,3 @@
 .main .main__container {
   display: flex;
 }
-
-.user-block {
-  align-items: center;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);
-  height: 401px;
-  margin-right: 16px;
-  width: 224px;
-}
-.user-block .user-block__avatar {
-  height: 190px;
-  width: 190px;
-  border-radius: 50%;
-  border: 4px solid #D8D8CE;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 18px 0 22px;
-}
-.user-block .user-block__data {
-  width: 100%;
-}
