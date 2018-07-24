@@ -17,6 +17,10 @@ class App extends Component {
     
     setDataItems(data) {
         console.log(data);
+        this.setState({
+            items: data,
+        });
+        console.log(this.state.items);
     }
     
     render() {
@@ -29,7 +33,7 @@ class App extends Component {
                     loaded={isLoaded}
                 />
                 <Footer 
-                    setDataItems={this.setDataItems}
+                    setDataItems={(data) => this.setDataItems(data)}
                     loaded={isLoaded}
                 />
             </div>
