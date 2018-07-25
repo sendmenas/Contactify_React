@@ -26,24 +26,7 @@ class Footer extends Component {
         this.setState({
             syncTime: fullDate,
         });
-    }
-
-    componentDidMount() {
-        fetch('https://raw.githubusercontent.com/sendmenas/MBS_Contactify/master/contacts.json')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        items: result,
-                    });
-                    this.props.setDataItems(result);
-                },
-                (error) => {
-                    this.setState({
-                        error
-                    });
-                }
-            )
+        this.props.requestData();
     }
 
     render() {

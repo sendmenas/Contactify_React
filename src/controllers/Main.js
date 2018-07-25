@@ -37,7 +37,9 @@ class Main extends Component {
 			<main className="main">
 				<div className="main__filter">
 					<FilterInput />
-					<FilterDropdown />
+					<FilterDropdown 
+						dataItems={items}
+					/>
 					<FilterCheckbox />
 					<FilterButton value={"FILTER"} />
 					<FilterButton value={"RESET"} />

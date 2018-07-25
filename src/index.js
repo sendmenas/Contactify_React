@@ -15,12 +15,27 @@ class App extends Component {
         }
     }
     
-    setDataItems(data) {
-        this.setState({
-            items: data,
-            itemsReceived: true,
-        });
+    requestData() {
+        fetch('https://raw.githubusercontent.com/sendmenas/MBS_Contactify/master/contacts.json')
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        items: result,
+                        itemsReceived: true,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        itemsReceived: false,
+                    });
+                }
+            )
     }
+
+    componentDidMount() {
+        this.requestData();
+	}
     
     render() {
         let isLoaded = this.state.itemsReceived;
@@ -34,7 +49,7 @@ class App extends Component {
                     loaded={isLoaded}
                 />
                 <Footer 
-                    setDataItems={(data) => this.setDataItems(data)}
+                    requestData={() => this.requestData()}
                     loaded={isLoaded}
                 />
             </div>
