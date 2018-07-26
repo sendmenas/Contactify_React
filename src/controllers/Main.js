@@ -12,7 +12,9 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			nameFilterValue: "",
 			selectedContract: {
+				avatar: "",
 				name: "",
 				surname: "",
 				city: "",
@@ -20,6 +22,13 @@ class Main extends Component {
 				phone: "",
 			},
 		}
+	}
+
+	handleFilterTextChange(value) {
+		console.log(value);
+		this.setState({
+			nameFilterValue: value,
+		});	
 	}
 
 	setSelectedContract(contract) {
@@ -36,7 +45,9 @@ class Main extends Component {
 		return (
 			<main className="main">
 				<div className="main__filter">
-					<FilterInput />
+					<FilterInput
+						onFilterTextChange={(value) => this.handleFilterTextChange(value)}
+					/>
 					<FilterDropdown 
 						dataItems={items}
 					/>
@@ -49,7 +60,7 @@ class Main extends Component {
 					<UserBlock selectedItem={selectedContract} />
 					<ItemTable 
 						dataItems={items}
-						setSelectedContract={(contract) => this.setSelectedContract(contract)}
+						onClick={(contract) => this.setSelectedContract(contract)}
 					/>
 				</div>
 			</main>

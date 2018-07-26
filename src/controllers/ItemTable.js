@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../css/ItemTable.css';
 
 function Item(props) {
-    console.log(props);
     return (
         <tr className="data-item" onClick={() => props.onClick(props.data)}>
 			<th className="data-item__name">
@@ -23,7 +22,6 @@ function Item(props) {
 
 class ItemTable extends Component {
 	render() {
-        console.log(this.props);
         const items = this.props.dataItems.map((item) => {
             return (<Item 
                 key={item.id}

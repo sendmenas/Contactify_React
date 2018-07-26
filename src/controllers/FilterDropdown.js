@@ -3,16 +3,24 @@ import '../css/FilterDropdown.css';
 
 function DropdownItem (props) {
     return (
-        <div className="cities-container__city">{props.value}</div>
+        <div 
+            onClick={() => props.value}
+            className="cities-container__city">{props.value}
+        </div>
     );
 }
 
 class FilterDropdown extends Component {
     constructor(props) {
         super(props);
+        this.handleFilterCitySelection = this.handleFilterCitySelection.bind(this);
         this.state = {
             dropdownVisibility: "hidden",
         }
+    }
+
+    onFilterCitySelection(value) {
+        this.props.handleFilterCitySelection(value);
     }
 
     toggleList() {
@@ -31,7 +39,7 @@ class FilterDropdown extends Component {
                 return (<DropdownItem 
                     key={item.city}
                     value={item.city}
-                    onClick={() => {}}
+                    onClick={(value) => this.onFilterCitySelection(value)}
                 />)
             }
         });
