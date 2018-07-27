@@ -4,7 +4,12 @@ import '../css/FilterButton.css';
 class FilterButton extends Component {
     render() {
         return (
-            <div className="filter-button">{this.props.value}</div>
+            <div 
+                onClick={() => this.props.manageFilter()}
+                className="filter-button"
+            >
+                {this.props.value}
+            </div>
         );
     }
 }

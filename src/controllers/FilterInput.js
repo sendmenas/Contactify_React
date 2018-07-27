@@ -28,6 +28,7 @@ class FilterInput extends Component {
                     placeholder="Name"
                     type="text"
                     onChange={this.handleFilterTextChange}
+                    value={this.props.value}
                 ></input>
             </div>
         );

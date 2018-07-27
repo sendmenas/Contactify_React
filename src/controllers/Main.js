@@ -14,11 +14,7 @@ class Main extends Component {
 		this.state = {
 			selectedCity: "",
 			nameFilterValue: "",
-<<<<<<< HEAD
-			cityFilterValue: "",
-=======
 			activityFilter: false,
->>>>>>> bfce145f6ca532ee0874b396859e12f7a9ebf2df
 			selectedContract: {
 				avatar: "",
 				name: "",
@@ -31,61 +27,81 @@ class Main extends Component {
 	}
 
 	handleFilterTextChange(value) {
+		console.log(value);
 		this.setState({
 			nameFilterValue: value,
-		});	
+		});
 	}
 
 	handleFilterCitySelection(value) {
 		console.log(value);
 		this.setState({
-			cityFilterValue: value,
-		});	
+			selectedCity: value,
+		});
+	}
+
+	handleActivitySelection(value) {
+		console.log(value);
+		this.setState({
+			activityFilter: value,
+		});
 	}
 
 	setSelectedContract(contract) {
+		console.log(contract);
 		this.setState({
 			selectedContract: contract,
 		})
 	}
 
-	setSelectedCity(city) {
+	filterItems() {
+		console.log("FILTER ITEMS");
+	}
+
+	resetFilter() {
 		this.setState({
-			selectedCity: city,
-		})
+			selectedCity: "",
+			nameFilterValue: "",
+			activityFilter: false,
+		});
+		console.log(this.state);
 	}
 
 	render() {
 		const items = this.props.items;
 		const selectedContract = this.state.selectedContract;
-		const selectedCity = this.state.selectedCity;
 		const active = this.state.activityFilter;
-		
+		const filterValues = this.state;
 		return (
 			<main className="main">
 				<div className="main__filter">
 					<FilterInput
+						value={this.state.nameFilterValue}
 						onFilterTextChange={(value) => this.handleFilterTextChange(value)}
 					/>
-					<FilterDropdown 
-						handleFilterCitySelection={(value => this.setSelectedCity(value))}
+					<FilterDropdown
 						dataItems={items}
-<<<<<<< HEAD
-						onFilterItemSelectede={(value) => this.handleFilterCitySelection(value)}
-=======
-						selectedCity={selectedCity}
+						onFilterItemSelected={(value) => this.handleFilterCitySelection(value)}
+						selectedCity={this.state.selectedCity}
 					/>
-					<FilterCheckbox 
+					<FilterCheckbox
+						activitySelection={(value) => this.handleActivitySelection(value)}
 						active={active}
->>>>>>> bfce145f6ca532ee0874b396859e12f7a9ebf2df
 					/>
-					<FilterButton value={"FILTER"} />
-					<FilterButton value={"RESET"} />
+					<FilterButton
+						manageFilter={() => this.filterItems()}
+						value={"FILTER"}
+					/>
+					<FilterButton 
+						manageFilter={() => this.resetFilter()}
+						value={"RESET"}
+					/>
 					<AddContractButton />
 				</div>
 				<div className="main__container">
 					<UserBlock selectedItem={selectedContract} />
-					<ItemTable 
+					<ItemTable
+						filter={filterValues}
 						dataItems={items}
 						onClick={(contract) => this.setSelectedContract(contract)}
 					/>

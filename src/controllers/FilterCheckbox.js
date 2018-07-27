@@ -5,13 +5,22 @@ class FilterCheckbox extends Component {
     constructor(props) {
         super(props);
     }
+
+    setActivitySelection(e) {
+        this.props.activitySelection(e.target.checked);
+    }
+
     render() {
         const checkBoxClass = this.props.active === false ?  "checkbox__input" : "checkbox__input checkbox__input--checked";
 
         return (
             <div className="checkbox">
                 <div className={checkBoxClass}>
-                    <input type="checkbox"></input>
+                    <input
+                        type="checkbox"
+                        onChange={(e) => this.setActivitySelection(e)}
+                        checked={this.props.active}
+                    ></input>
                 </div>
                 <div className="checkbox__label">Show active</div>
             </div>  

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import '../css/ItemTable.css';
 
 function Item(props) {
+    const onlineStatus = props.data.active === true ? "user-online" : "user-offline";
     return (
         <tr className="data-item" onClick={() => props.onClick(props.data)}>
 			<th className="data-item__name">
-				<div className="user-online"></div>
+				<div className={onlineStatus}></div>
 				<div>{props.data.name}</div>
 			</th>
             <th className="data-item__surname">{props.data.surname}</th>
@@ -21,13 +22,46 @@ function Item(props) {
 }
 
 class ItemTable extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
+
 	render() {
+        const filter = this.props.filter;
+        console.log(filter);
         const items = this.props.dataItems.map((item) => {
-            return (<Item 
-                key={item.id}
-				data={item}
-                onClick={(item) => this.props.setSelectedContract(item)}
-			/>)
+            let filterIndicators = [];
+            if (filter.nameFilterValue !== "") {
+                let name = (item.name).toLowerCase();
+                let nameFilterValue = filter.nameFilterValue.trim().toLowerCase();
+                if (name.indexOf(nameFilterValue) !== -1) {
+                    filterIndicators.push(true);
+                } else {
+                    filterIndicators.push(false);
+                }
+            }
+            if (filter.selectedCity !== "") {
+                if (item.city === filter.selectedCity) {
+                    filterIndicators.push(true);
+                } else {
+                    filterIndicators.push(false);
+                }
+            }
+            if (filter.activityFilter) {
+                if (item.active) {
+                    filterIndicators.push(true);
+                } else {
+                    filterIndicators.push(false);
+                }
+            }
+            if (filterIndicators.indexOf(false) === -1) {
+                return (<Item
+                    key={item.id}
+                    data={item}
+                    onClick={(item) => this.props.onClick(item)}
+                />)
+            }
 		});
 
         return (

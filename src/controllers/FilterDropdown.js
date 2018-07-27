@@ -13,14 +13,14 @@ function DropdownItem (props) {
 class FilterDropdown extends Component {
     constructor(props) {
         super(props);
-        this.setSelectedContract = this.onFilterCitySelection.bind(this);
+        console.log(props);
         this.state = {
             dropdownVisibility: "hidden",
         }
     }
 
     onFilterCitySelection(value) {
-        this.props.handleFilterCitySelection(value);
+        this.props.onFilterItemSelected(value);
     }
 
     toggleList() {
@@ -44,7 +44,7 @@ class FilterDropdown extends Component {
             }
         });
 
-        const selectedCity = this.props.selectedCity == "" ? "City" : this.props.selectedCity;
+        const selectedCity = this.props.selectedCity === "" ? "City" : this.props.selectedCity;
 
         const divStyle = {
             visibility: this.state.dropdownVisibility,
