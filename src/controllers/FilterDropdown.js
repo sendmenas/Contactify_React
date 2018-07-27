@@ -4,7 +4,7 @@ import '../css/FilterDropdown.css';
 function DropdownItem (props) {
     return (
         <div 
-            onClick={() => props.value}
+            onClick={() => props.onClick(props.value)}
             className="cities-container__city">{props.value}
         </div>
     );
@@ -13,7 +13,7 @@ function DropdownItem (props) {
 class FilterDropdown extends Component {
     constructor(props) {
         super(props);
-        this.handleFilterCitySelection = this.handleFilterCitySelection.bind(this);
+        this.setSelectedContract = this.onFilterCitySelection.bind(this);
         this.state = {
             dropdownVisibility: "hidden",
         }
@@ -44,13 +44,15 @@ class FilterDropdown extends Component {
             }
         });
 
+        const selectedCity = this.props.selectedCity == "" ? "City" : this.props.selectedCity;
+
         const divStyle = {
             visibility: this.state.dropdownVisibility,
         }
 
         return (
             <div className="filter-city" onClick={() => this.toggleList()}>
-                <div>City</div>
+                <div>{selectedCity}</div>
                 <div className="filter-city__arrow"></div>
                 <div className="filter-city__select" style={divStyle}>
                     <div>City</div>

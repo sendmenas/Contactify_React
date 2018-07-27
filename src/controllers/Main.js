@@ -12,7 +12,9 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			selectedCity: "",
 			nameFilterValue: "",
+			activityFilter: false,
 			selectedContract: {
 				avatar: "",
 				name: "",
@@ -32,15 +34,22 @@ class Main extends Component {
 	}
 
 	setSelectedContract(contract) {
-		console.log(contract);
 		this.setState({
 			selectedContract: contract,
+		})
+	}
+
+	setSelectedCity(city) {
+		this.setState({
+			selectedCity: city,
 		})
 	}
 
 	render() {
 		const items = this.props.items;
 		const selectedContract = this.state.selectedContract;
+		const selectedCity = this.state.selectedCity;
+		const active = this.state.activityFilter;
 		
 		return (
 			<main className="main">
@@ -49,9 +58,13 @@ class Main extends Component {
 						onFilterTextChange={(value) => this.handleFilterTextChange(value)}
 					/>
 					<FilterDropdown 
+						handleFilterCitySelection={(value => this.setSelectedCity(value))}
 						dataItems={items}
+						selectedCity={selectedCity}
 					/>
-					<FilterCheckbox />
+					<FilterCheckbox 
+						active={active}
+					/>
 					<FilterButton value={"FILTER"} />
 					<FilterButton value={"RESET"} />
 					<AddContractButton />
