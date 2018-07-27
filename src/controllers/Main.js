@@ -13,6 +13,7 @@ class Main extends Component {
 		super(props);
 		this.state = {
 			nameFilterValue: "",
+			cityFilterValue: "",
 			selectedContract: {
 				avatar: "",
 				name: "",
@@ -25,14 +26,19 @@ class Main extends Component {
 	}
 
 	handleFilterTextChange(value) {
-		console.log(value);
 		this.setState({
 			nameFilterValue: value,
 		});	
 	}
 
+	handleFilterCitySelection(value) {
+		console.log(value);
+		this.setState({
+			cityFilterValue: value,
+		});	
+	}
+
 	setSelectedContract(contract) {
-		console.log(contract);
 		this.setState({
 			selectedContract: contract,
 		})
@@ -50,6 +56,7 @@ class Main extends Component {
 					/>
 					<FilterDropdown 
 						dataItems={items}
+						onFilterItemSelectede={(value) => this.handleFilterCitySelection(value)}
 					/>
 					<FilterCheckbox />
 					<FilterButton value={"FILTER"} />

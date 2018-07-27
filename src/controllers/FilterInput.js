@@ -17,7 +17,6 @@ class FilterInput extends Component {
         } else {
             e.target.value = nameFilterValue;
         }
-        console.log(this.props);
         this.props.onFilterTextChange(nameFilterValue);
     }
 
