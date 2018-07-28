@@ -13,7 +13,6 @@ function DropdownItem (props) {
 class FilterDropdown extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             dropdownVisibility: "hidden",
         }
@@ -31,12 +30,12 @@ class FilterDropdown extends Component {
     }
 
     render() {
-
         const cityArr = [];
-        const dropdownList = this.props.dataItems.map((item) => {
+        const dropdownList = [];
+        this.props.dataItems.forEach((item) => {
             if (cityArr.indexOf(item.city) === -1) {
                 cityArr.push(item.city);
-                return (<DropdownItem 
+                dropdownList.push(<DropdownItem 
                     key={item.city}
                     value={item.city}
                     onClick={(value) => this.onFilterCitySelection(value)}

@@ -15,6 +15,11 @@ class Main extends Component {
 			selectedCity: "",
 			nameFilterValue: "",
 			activityFilter: false,
+			filterValues: {
+				selectedCity: "",
+				nameFilterValue: "",
+				activityFilter: false,
+			},
 			selectedContract: {
 				avatar: "",
 				name: "",
@@ -27,35 +32,40 @@ class Main extends Component {
 	}
 
 	handleFilterTextChange(value) {
-		console.log(value);
 		this.setState({
 			nameFilterValue: value,
 		});
 	}
 
 	handleFilterCitySelection(value) {
-		console.log(value);
 		this.setState({
 			selectedCity: value,
 		});
 	}
 
 	handleActivitySelection(value) {
-		console.log(value);
 		this.setState({
 			activityFilter: value,
 		});
 	}
 
 	setSelectedContract(contract) {
-		console.log(contract);
 		this.setState({
 			selectedContract: contract,
 		})
 	}
 
 	filterItems() {
-		console.log("FILTER ITEMS");
+		const city = this.state.selectedCity;
+		const name = this.state.nameFilterValue;
+		const active = this.state.activityFilter;
+		this.setState({
+			filterValues: {
+				selectedCity: city,
+				nameFilterValue: name,
+				activityFilter: active,
+			}
+		});
 	}
 
 	resetFilter() {
@@ -63,15 +73,24 @@ class Main extends Component {
 			selectedCity: "",
 			nameFilterValue: "",
 			activityFilter: false,
+			filterValues: {
+				selectedCity: "",
+				nameFilterValue: "",
+				activityFilter: false,
+			}
 		});
-		console.log(this.state);
+	}
+
+	addContract(data) {
+		const arr = this.props.items;
+		arr.push(data);
 	}
 
 	render() {
 		const items = this.props.items;
 		const selectedContract = this.state.selectedContract;
 		const active = this.state.activityFilter;
-		const filterValues = this.state;
+		const filterValues = this.state.filterValues;
 		return (
 			<main className="main">
 				<div className="main__filter">
@@ -96,7 +115,9 @@ class Main extends Component {
 						manageFilter={() => this.resetFilter()}
 						value={"RESET"}
 					/>
-					<AddContractButton />
+					<AddContractButton 
+						onClick={(data) => this.props.showContractDataDialog(data)}
+					/>
 				</div>
 				<div className="main__container">
 					<UserBlock selectedItem={selectedContract} />
@@ -104,6 +125,8 @@ class Main extends Component {
 						filter={filterValues}
 						dataItems={items}
 						onClick={(contract) => this.setSelectedContract(contract)}
+						remove={(id) => this.props.removeItem(id)}
+						edit={(item) => this.props.showContractDataDialog(item)}
 					/>
 				</div>
 			</main>

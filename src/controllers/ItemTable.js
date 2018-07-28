@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import '../css/ItemTable.css';
 
+
 function Item(props) {
-    const onlineStatus = props.data.active === true ? "user-online" : "user-offline";
-    return (
-        <tr className="data-item" onClick={() => props.onClick(props.data)}>
-			<th className="data-item__name">
-				<div className={onlineStatus}></div>
-				<div>{props.data.name}</div>
-			</th>
-            <th className="data-item__surname">{props.data.surname}</th>
-            <th className="data-item__city">{props.data.city}</th>
-            <th className="data-item__email">{props.data.email}</th>
-            <th className="data-item__phone">{props.data.phone}</th>
-			<th className="data-item__actions">
-				<div className="edit-item"></div>
-				<div className="delete-item"></div>
-			</th>
-		</tr>
-    );
+        const onlineStatus = props.data.active === true ? "user-online" : "user-offline";
+        return (
+            <tr className="data-item" onClick={(evt) => props.onClick({target:evt.target, item:props.data})}>
+                <th className="data-item__name">
+                    <div className={onlineStatus}></div>
+                    <div>{props.data.name}</div>
+                </th>
+                <th className="data-item__surname">{props.data.surname}</th>
+                <th className="data-item__city">{props.data.city}</th>
+                <th className="data-item__email">{props.data.email}</th>
+                <th className="data-item__phone">{props.data.phone}</th>
+                <th className="data-item__actions">
+                    <div className="edit-item" onClick={() => props.editItem(props.data)}></div>
+                    <div className="delete-item" onClick={() => props.removeItem(props.data.id)}></div>
+                </th>
+            </tr>
+        );
+    // }
 }
 
 class ItemTable extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
+    checkTarget(data) {
+        const target = data.target;
+        if (target.className !== "edit-item" && target.className !== "delete-item") {
+            this.props.onClick(data.item); 
+        }
     }
 
 	render() {
         const filter = this.props.filter;
-        console.log(filter);
-        const items = this.props.dataItems.map((item) => {
+        const items = [];
+        this.props.dataItems.forEach((item) => {
             let filterIndicators = [];
             if (filter.nameFilterValue !== "") {
                 let name = (item.name).toLowerCase();
@@ -56,10 +60,12 @@ class ItemTable extends Component {
                 }
             }
             if (filterIndicators.indexOf(false) === -1) {
-                return (<Item
+                items.push(<Item
                     key={item.id}
                     data={item}
-                    onClick={(item) => this.props.onClick(item)}
+                    onClick={(data) => this.checkTarget(data)}
+                    removeItem={(id) => this.props.remove(id)}
+                    editItem={(item) => this.props.edit(item)}
                 />)
             }
 		});

@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import '../css/FilterCheckbox.css';
 
 class FilterCheckbox extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     setActivitySelection(e) {
         this.props.activitySelection(e.target.checked);
     }
