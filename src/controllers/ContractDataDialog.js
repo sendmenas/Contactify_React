@@ -4,7 +4,10 @@ import '../css/ContractDataDialog.css'
 class ContractDataDialog extends Component {
     constructor(props) {
         super(props);
-
+        
+        this.state = {
+            data: this.props.data,
+        }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSurnameChange = this.handleSurnameChange.bind(this);
         this.handleAvatarChange = this.handleAvatarChange.bind(this);
@@ -14,7 +17,9 @@ class ContractDataDialog extends Component {
     }
 
     handleNameChange(item, evt) {
+        console.log(item);
         item.name = evt.target.value;
+        console.log(item);
     }
 
     handleSurnameChange(item, evt) {
@@ -51,6 +56,7 @@ class ContractDataDialog extends Component {
     }
 
     render() {
+        console.log(this.props);
         const dialogDisplayState = {
             display: this.props.displayDialog ? 'flex' : 'none',
         }
@@ -65,12 +71,14 @@ class ContractDataDialog extends Component {
             active: this.props.data.active,
             id: this.props.data.id,
         };
-        const name = this.props.data.name === null ? "" : this.props.data.name; 
+        
+        const name = this.props.data.name === null ? "" : itemData.name; 
         const surname = this.props.data.surname === null ? "" : this.props.data.surname; 
         const avatar = this.props.data.avatar === null ? "" : this.props.data.avatar; 
         const city = this.props.data.city === null ? "" : this.props.data.city; 
         const email = this.props.data.email === null ? "" : this.props.data.email; 
-        const phone = this.props.data.phone === null ? "" : this.props.data.phone;        
+        const phone = this.props.data.phone === null ? "" : this.props.data.phone;
+        
         return(
             <dialog className="user-data-dialog" style={dialogDisplayState}>
                 <form className="user-data-dialog__container">
@@ -87,73 +95,73 @@ class ContractDataDialog extends Component {
                             type="text"
                             className="user-data-dialog__container__row__input"
                             onChange={(evt) => this.handleNameChange(itemData, evt)}
-                            defaultValue={name}
+                            value={name}
                         ></input>
                     </div>
-                        <div className="user-data-dialog__container__row">
-                            <label
-                                htmlFor="userDataDialogSurname"
-                                className="user-data-dialog__container__row__label"
-                            >Surname:</label>
-                            <input
-                                type="text"
-                                className="user-data-dialog__container__row__input"
-                                onChange={(evt) => this.handleSurnameChange(itemData, evt)}
-                                defaultValue={surname}
-                            ></input>
-                        </div>
-                        <div className="user-data-dialog__container__row">
-                            <label
-                                htmlFor="userDataDialogAvatar"
-                                className="user-data-dialog__container__row__label"
-                            >Avatar:</label>
-                            <input
-                                type="text"
-                                className="user-data-dialog__container__row__input"
-                                onChange={(evt) => this.handleAvatarChange(itemData, evt)}
-                                defaultValue={avatar}
-                            ></input>
-                        </div>
-                        <div className="user-data-dialog__container__row">
-                            <label
-                                htmlFor="userDataDialogCity"
-                                className="user-data-dialog__container__row__label"
-                            >City:</label>
-                            <input
-                                type="text"
-                                className="user-data-dialog__container__row__input"
-                                onChange={(evt) => this.handleCityChange(itemData, evt)}
-                                defaultValue={city}
-                            ></input>
-                        </div>
-                        <div className="user-data-dialog__container__row">
-                            <label
-                                htmlFor="userDataDialogEmail"
-                                className="user-data-dialog__container__row__label"
-                            >Email:</label>
-                            <input
-                                type="text"
-                                className="user-data-dialog__container__row__input"
-                                onChange={(evt) => this.handleEmailChange(itemData, evt)}
-                                defaultValue={email}
-                            ></input>
-                        </div>
-                        <div className="user-data-dialog__container__row">
-                            <label
-                                htmlFor="userDataDialogPhone"
-                                className="user-data-dialog__container__row__label"
-                            >Phone:</label>
-                            <input
-                                type="text"
-                                className="user-data-dialog__container__row__input"
-                                onChange={(evt) => this.handlePhoneChange(itemData, evt)}
-                                defaultValue={phone}
-                            ></input>
-                        </div>
-                        <div
-                            className="user-data-dialog__container__submit"
-                            onClick={() => this.createItem(itemData)}
-                        >SUBMIT</div>
+                    <div className="user-data-dialog__container__row">
+                        <label
+                            htmlFor="userDataDialogSurname"
+                            className="user-data-dialog__container__row__label"
+                        >Surname:</label>
+                        <input
+                            type="text"
+                            className="user-data-dialog__container__row__input"
+                            onChange={(evt) => this.handleSurnameChange(itemData, evt)}
+                            value={surname}
+                        ></input>
+                    </div>
+                    <div className="user-data-dialog__container__row">
+                        <label
+                            htmlFor="userDataDialogAvatar"
+                            className="user-data-dialog__container__row__label"
+                        >Avatar:</label>
+                        <input
+                            type="text"
+                            className="user-data-dialog__container__row__input"
+                            onChange={(evt) => this.handleAvatarChange(itemData, evt)}
+                            value={avatar}
+                        ></input>
+                    </div>
+                    <div className="user-data-dialog__container__row">
+                        <label
+                            htmlFor="userDataDialogCity"
+                            className="user-data-dialog__container__row__label"
+                        >City:</label>
+                        <input
+                            type="text"
+                            className="user-data-dialog__container__row__input"
+                            onChange={(evt) => this.handleCityChange(itemData, evt)}
+                            value={city}
+                        ></input>
+                    </div>
+                    <div className="user-data-dialog__container__row">
+                        <label
+                            htmlFor="userDataDialogEmail"
+                            className="user-data-dialog__container__row__label"
+                        >Email:</label>
+                        <input
+                            type="text"
+                            className="user-data-dialog__container__row__input"
+                            onChange={(evt) => this.handleEmailChange(itemData, evt)}
+                            value={email}
+                        ></input>
+                    </div>
+                    <div className="user-data-dialog__container__row">
+                        <label
+                            htmlFor="userDataDialogPhone"
+                            className="user-data-dialog__container__row__label"
+                        >Phone:</label>
+                        <input
+                            type="text"
+                            className="user-data-dialog__container__row__input"
+                            onChange={(evt) => this.handlePhoneChange(itemData, evt)}
+                            value={phone}
+                        ></input>
+                    </div>
+                    <div
+                        className="user-data-dialog__container__submit"
+                        onClick={() => this.createItem(itemData)}
+                    >SUBMIT</div>
                 </form>
             </dialog>
         );

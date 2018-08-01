@@ -67,7 +67,16 @@ class App extends Component {
 
     setContractDataAndShowDialog(data) {
         this.setState({
-            predefinedContractData: data,
+            predefinedContractData: {
+                name: data.name,
+                surname: data.surname,
+                avatar: data.avatar,
+                city: data.city,
+                email: data.email,
+                phone: data.phone,
+                active: data.active,
+                id: data.id,
+            },
             showContractDialog: true,
         });
     }
@@ -79,7 +88,6 @@ class App extends Component {
     }
 
     updateItems(item) {
-        console.log(item);
         if (item.id === null) {
             const maxId = Math.max(...(this.state.items.map((item) => item.id)));
             item.id = maxId + 1;
