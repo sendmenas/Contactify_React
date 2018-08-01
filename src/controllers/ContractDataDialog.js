@@ -4,45 +4,16 @@ import '../css/ContractDataDialog.css'
 class ContractDataDialog extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            data: this.props.data,
-        }
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleSurnameChange = this.handleSurnameChange.bind(this);
-        this.handleAvatarChange = this.handleAvatarChange.bind(this);
-        this.handleCityChange = this.handleCityChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePhoneChange = this.handlePhoneChange.bind(this);
-    }
-
-    handleNameChange(item, evt) {
-        console.log(item);
-        item.name = evt.target.value;
-        console.log(item);
-    }
-
-    handleSurnameChange(item, evt) {
-        item.surname = evt.target.value;
-    }
-
-    handleAvatarChange(item, evt) {
-        item.avatar = evt.target.value;
-    }
-
-    handleCityChange(item, evt) {
-        item.city = evt.target.value;
-    }
-
-    handleEmailChange(item, evt) {
-        item.email = evt.target.value;
-    }
-
-    handlePhoneChange(item, evt) {
-        item.phone = evt.target.value;
+        this.nameInput = React.createRef();
+        this.surnameInput = React.createRef();
+        this.cityInput = React.createRef();
+        this.avatarInput = React.createRef();
+        this.emailInput = React.createRef();
+        this.phoneInput = React.createRef();
     }
 
     createItem(data) {
+        console.log(data);
         if (data.name.length > 0 &&
             data.surname.length > 0 &&
             data.avatar.length > 0 &&
@@ -56,28 +27,18 @@ class ContractDataDialog extends Component {
     }
 
     render() {
-        console.log(this.props);
         const dialogDisplayState = {
             display: this.props.displayDialog ? 'flex' : 'none',
         }
-
-        let itemData = {
-            name: this.props.data.name,
-            surname: this.props.data.surname,
-            avatar: this.props.data.avatar,
-            city: this.props.data.city,
-            email: this.props.data.email,
-            phone: this.props.data.phone,
-            active: this.props.data.active,
-            id: this.props.data.id,
-        };
         
-        const name = this.props.data.name === null ? "" : itemData.name; 
-        const surname = this.props.data.surname === null ? "" : this.props.data.surname; 
-        const avatar = this.props.data.avatar === null ? "" : this.props.data.avatar; 
-        const city = this.props.data.city === null ? "" : this.props.data.city; 
-        const email = this.props.data.email === null ? "" : this.props.data.email; 
-        const phone = this.props.data.phone === null ? "" : this.props.data.phone;
+        let itemData = this.props.data;
+
+        const name = itemData.name === null ? "" : itemData.name; 
+        const surname = itemData.surname === null ? "" : itemData.surname; 
+        const avatar = itemData.avatar === null ? "" : itemData.avatar; 
+        const city = itemData.city === null ? "" : itemData.city; 
+        const email = itemData.email === null ? "" : itemData.email; 
+        const phone = itemData.phone === null ? "" : itemData.phone;
         
         return(
             <dialog className="user-data-dialog" style={dialogDisplayState}>
@@ -92,9 +53,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >Name:</label>
                         <input
+                            ref={this.nameInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handleNameChange(itemData, evt)}
+                            onChange={() => this.props.handleNameChange(this.nameInput.current.value)}
                             value={name}
                         ></input>
                     </div>
@@ -104,9 +66,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >Surname:</label>
                         <input
+                            ref={this.surnameInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handleSurnameChange(itemData, evt)}
+                            onChange={() => this.props.handleSurnameChange(this.surnameInput.current.value)}
                             value={surname}
                         ></input>
                     </div>
@@ -116,9 +79,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >Avatar:</label>
                         <input
+                            ref={this.avatarInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handleAvatarChange(itemData, evt)}
+                            onChange={() => this.props.handleAvatarChange(this.avatarInput.current.value)}
                             value={avatar}
                         ></input>
                     </div>
@@ -128,9 +92,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >City:</label>
                         <input
+                            ref={this.cityInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handleCityChange(itemData, evt)}
+                            onChange={() => this.props.handleCityChange(this.cityInput.current.value)}
                             value={city}
                         ></input>
                     </div>
@@ -140,9 +105,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >Email:</label>
                         <input
+                            ref={this.emailInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handleEmailChange(itemData, evt)}
+                            onChange={() => this.props.handleEmailChange(this.emailInput.current.value)}
                             value={email}
                         ></input>
                     </div>
@@ -152,9 +118,10 @@ class ContractDataDialog extends Component {
                             className="user-data-dialog__container__row__label"
                         >Phone:</label>
                         <input
+                            ref={this.phoneInput}
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={(evt) => this.handlePhoneChange(itemData, evt)}
+                            onChange={() => this.props.handlePhoneChange(this.phoneInput.current.value)}
                             value={phone}
                         ></input>
                     </div>

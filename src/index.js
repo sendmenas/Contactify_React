@@ -123,6 +123,54 @@ class App extends Component {
         }
     }
 
+    handleNameChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.name = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
+    handleSurnameChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.surname = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
+    handleAvatarChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.avatar = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
+    handleCityChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.city = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
+    handleEmailChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.email = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
+    handlePhoneChange(val) {
+        let updatedContract = Object.assign({}, this.state.predefinedContractData);
+        updatedContract.phone = val;
+        this.setState({
+            predefinedContractData: updatedContract,
+        })
+    }
+
     render() {
         let isLoaded = this.state.itemsReceived;
         let items = this.state.items;
@@ -147,6 +195,12 @@ class App extends Component {
                     hideDialog={() => this.hideContractDataDialog()}
                     updateItems={(newItem) => this.updateItems(newItem)}
                     data={contractData}
+                    handleNameChange={(val) => this.handleNameChange(val)}
+                    handleSurnameChange={(val) => this.handleSurnameChange(val)}
+                    handleAvatarChange={(val) => this.handleAvatarChange(val)}
+                    handleCityChange={(val) => this.handleCityChange(val)}
+                    handleEmailChange={(val) => this.handleEmailChange(val)}
+                    handlePhoneChange={(val) => this.handlePhoneChange(val)}
                 />
             </div>
         );
