@@ -14,7 +14,16 @@ class App extends Component {
             items: [],
             itemsReceived: false,
             showContractDialog: false,
-            predefinedContractData: null,
+            predefinedContractData: {
+                name: null,
+                surname: null,
+                avatar: null,
+                city: null,
+                email: null,
+                phone: null,
+                active: false,
+                id: null,
+            },
         }
     }
     
@@ -40,18 +49,27 @@ class App extends Component {
         this.requestData();
     }
     
-    displayContractDataDialog(data) {
-        if (data === null) {
-            this.setState({
-                predefinedContractData: null,
-                showContractDialog: true,
-            });
-        } else {
-            this.setState({
-                predefinedContractData: data,
-                showContractDialog: true,
-            });
-        }
+    displayContractDataDialog() {
+        this.setState({
+            predefinedContractData: {
+                name: null,
+                surname: null,
+                avatar: null,
+                city: null,
+                email: null,
+                phone: null,
+                active: false,
+                id: null,
+            },
+            showContractDialog: true,
+        });
+    }
+
+    setContractDataAndShowDialog(data) {
+        this.setState({
+            predefinedContractData: data,
+            showContractDialog: true,
+        });
     }
     
     hideContractDataDialog() {
@@ -61,18 +79,34 @@ class App extends Component {
     }
 
     updateItems(item) {
+        console.log(item);
         if (item.id === null) {
             const maxId = Math.max(...(this.state.items.map((item) => item.id)));
             item.id = maxId + 1;
             this.state.items.push(item);
         } else {
-            console.log(item);
+            const itemsArr = this.state.items.slice();
+            for(let dItem of itemsArr) {
+                if (dItem.id === item.id) {
+                    dItem.name = item.name;
+                    dItem.surname = item.surname;
+                    dItem.city = item.city;
+                    dItem.avatar = item.avatar;
+                    dItem.email = item.email;
+                    dItem.phone = item.phone;
+                    dItem.active = item.active;
+                    dItem.id = item.id;
+                }
+            }
+            this.setState({
+                items: itemsArr
+            });
         }
     }
     
     removeContractItem(id) {
         if (id !== null) {
-            const itemsArr = this.state.items.slice(0);
+            const itemsArr = this.state.items.slice();
             const itemIndex = this.state.items.findIndex((item) => item.id === id);
             itemsArr.splice(itemIndex, 1);
             this.setState({
@@ -91,7 +125,8 @@ class App extends Component {
             <div className='page'>
                 <Header />
                 <Main
-                    showContractDataDialog={(data) => this.displayContractDataDialog(data)}
+                    showContractDataDialog={() => this.displayContractDataDialog()}
+                    showContractDataDialogWithData={(data) => this.setContractDataAndShowDialog(data)}
                     items={items}
                     removeItem={(id) => this.removeContractItem(id)}
                 />

@@ -126,7 +126,7 @@ class Main extends Component {
 						dataItems={items}
 						onClick={(contract) => this.setSelectedContract(contract)}
 						remove={(id) => this.props.removeItem(id)}
-						edit={(item) => this.props.showContractDataDialog(item)}
+						edit={(item) => this.props.showContractDataDialogWithData(item)}
 					/>
 				</div>
 			</main>

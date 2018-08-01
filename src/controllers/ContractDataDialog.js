@@ -5,27 +5,6 @@ class ContractDataDialog extends Component {
     constructor(props) {
         super(props);
 
-        if (this.props.data !== null) {
-            this.setState({
-                name: this.props.name,
-                surname: this.props.surname,
-                avatar: this.props.avatar,
-                city: this.props.city,
-                email: this.props.email,
-                phone: this.props.phone,
-                id: null,
-            });
-        }
-        this.state = {
-            name: "",
-            surname: "",
-            avatar: "",
-            city: "",
-            email: "",
-            phone: "",
-            id: null,
-        }
-
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSurnameChange = this.handleSurnameChange.bind(this);
         this.handleAvatarChange = this.handleAvatarChange.bind(this);
@@ -34,70 +13,40 @@ class ContractDataDialog extends Component {
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
     }
 
-    handleNameChange(event) {
-        this.setState({
-            name: event.target.value,
-        });
+    handleNameChange(item, evt) {
+        item.name = evt.target.value;
     }
 
-    handleSurnameChange(event) {
-        this.setState({
-            surname: event.target.value,
-        });
+    handleSurnameChange(item, evt) {
+        item.surname = evt.target.value;
     }
 
-    handleAvatarChange(event) {
-        this.setState({
-            avatar: event.target.value,
-        });
+    handleAvatarChange(item, evt) {
+        item.avatar = evt.target.value;
     }
 
-    handleCityChange(event) {
-        this.setState({
-            city: event.target.value,
-        });
+    handleCityChange(item, evt) {
+        item.city = evt.target.value;
     }
 
-    handleEmailChange(event) {
-        this.setState({
-            email: event.target.value,
-        });
+    handleEmailChange(item, evt) {
+        item.email = evt.target.value;
     }
 
-    handlePhoneChange(event) {
-        this.setState({
-            phone: event.target.value,
-        });
+    handlePhoneChange(item, evt) {
+        item.phone = evt.target.value;
     }
 
-    createItem() {
-        if (this.state.name.length > 0 &&
-            this.state.surname.length > 0 &&
-            this.state.avatar.length > 0 &&
-            this.state.city.length > 0 &&
-            this.state.email.length > 0 &&
-            this.state.phone.length > 0
+    createItem(data) {
+        if (data.name.length > 0 &&
+            data.surname.length > 0 &&
+            data.avatar.length > 0 &&
+            data.city.length > 0 &&
+            data.email.length > 0 &&
+            data.phone.length > 0
         ) {
-            let item = {
-                name: this.state.name,
-                surname: this.state.surname,
-                avatar: this.state.avatar,
-                city: this.state.city,
-                email: this.state.email,
-                phone: this.state.phone,
-                id: this.state.id,
-            }
-            this.props.updateItems(item);
+            this.props.updateItems(data);
             this.props.hideDialog();
-            this.setState({
-                name: "",
-                surname: "",
-                avatar: "",
-                city: "",
-                email: "",
-                phone: "",
-                id: null,
-            });
         }
     }
 
@@ -106,13 +55,22 @@ class ContractDataDialog extends Component {
             display: this.props.displayDialog ? 'flex' : 'none',
         }
 
-        const name = this.props.data === null ? "" : this.props.data.name; 
-        const surname = this.props.data === null ? "" : this.props.data.surname; 
-        const avatar = this.props.data === null ? "" : this.props.data.avatar; 
-        const city = this.props.data === null ? "" : this.props.data.city; 
-        const email = this.props.data === null ? "" : this.props.data.email; 
-        const phone = this.props.data === null ? "" : this.props.data.phone; 
-        
+        let itemData = {
+            name: this.props.data.name,
+            surname: this.props.data.surname,
+            avatar: this.props.data.avatar,
+            city: this.props.data.city,
+            email: this.props.data.email,
+            phone: this.props.data.phone,
+            active: this.props.data.active,
+            id: this.props.data.id,
+        };
+        const name = this.props.data.name === null ? "" : this.props.data.name; 
+        const surname = this.props.data.surname === null ? "" : this.props.data.surname; 
+        const avatar = this.props.data.avatar === null ? "" : this.props.data.avatar; 
+        const city = this.props.data.city === null ? "" : this.props.data.city; 
+        const email = this.props.data.email === null ? "" : this.props.data.email; 
+        const phone = this.props.data.phone === null ? "" : this.props.data.phone;        
         return(
             <dialog className="user-data-dialog" style={dialogDisplayState}>
                 <form className="user-data-dialog__container">
@@ -128,8 +86,8 @@ class ContractDataDialog extends Component {
                         <input
                             type="text"
                             className="user-data-dialog__container__row__input"
-                            onChange={this.handleNameChange}
-                            value={name}
+                            onChange={(evt) => this.handleNameChange(itemData, evt)}
+                            defaultValue={name}
                         ></input>
                     </div>
                         <div className="user-data-dialog__container__row">
@@ -140,8 +98,8 @@ class ContractDataDialog extends Component {
                             <input
                                 type="text"
                                 className="user-data-dialog__container__row__input"
-                                onChange={this.handleSurnameChange}
-                                value={surname}
+                                onChange={(evt) => this.handleSurnameChange(itemData, evt)}
+                                defaultValue={surname}
                             ></input>
                         </div>
                         <div className="user-data-dialog__container__row">
@@ -152,8 +110,8 @@ class ContractDataDialog extends Component {
                             <input
                                 type="text"
                                 className="user-data-dialog__container__row__input"
-                                onChange={this.handleAvatarChange}
-                                value={avatar}
+                                onChange={(evt) => this.handleAvatarChange(itemData, evt)}
+                                defaultValue={avatar}
                             ></input>
                         </div>
                         <div className="user-data-dialog__container__row">
@@ -164,8 +122,8 @@ class ContractDataDialog extends Component {
                             <input
                                 type="text"
                                 className="user-data-dialog__container__row__input"
-                                onChange={this.handleCityChange}
-                                value={city}
+                                onChange={(evt) => this.handleCityChange(itemData, evt)}
+                                defaultValue={city}
                             ></input>
                         </div>
                         <div className="user-data-dialog__container__row">
@@ -176,8 +134,8 @@ class ContractDataDialog extends Component {
                             <input
                                 type="text"
                                 className="user-data-dialog__container__row__input"
-                                onChange={this.handleEmailChange}
-                                value={email}
+                                onChange={(evt) => this.handleEmailChange(itemData, evt)}
+                                defaultValue={email}
                             ></input>
                         </div>
                         <div className="user-data-dialog__container__row">
@@ -188,13 +146,13 @@ class ContractDataDialog extends Component {
                             <input
                                 type="text"
                                 className="user-data-dialog__container__row__input"
-                                onChange={this.handlePhoneChange}
-                                value={phone}
+                                onChange={(evt) => this.handlePhoneChange(itemData, evt)}
+                                defaultValue={phone}
                             ></input>
                         </div>
                         <div
                             className="user-data-dialog__container__submit"
-                            onClick={() => this.createItem()}
+                            onClick={() => this.createItem(itemData)}
                         >SUBMIT</div>
                 </form>
             </dialog>
