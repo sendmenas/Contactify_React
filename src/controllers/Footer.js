@@ -30,7 +30,8 @@ class Footer extends Component {
     }
 
     render() {
-        
+        let syncIndicator = this.props.loaded ? "sync-icon" : "sync-icon sync-animation";
+
         return (
             <footer className="footer">
                 <nav className="footer__left">
@@ -65,7 +66,7 @@ class Footer extends Component {
                             <div>{this.state.syncTime}</div>
                         </div>
                         <div className="top-box__sync-container" onClick={() => this.setSyncTime()}>
-                            <div className="sync-icon"></div>
+                            <div className={syncIndicator}></div>
                             <div>Force sync</div>
                         </div>
                     </div>

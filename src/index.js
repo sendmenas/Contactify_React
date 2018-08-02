@@ -30,23 +30,44 @@ class App extends Component {
     }
     
     requestData() {
+        this.setState({
+            itemsReceived: false,
+        });
         fetch('https://raw.githubusercontent.com/sendmenas/MBS_Contactify/master/contacts.json')
             .then(res => res.json())
             .then(
                 (result) => {
+                    this.addItemsWithDelay(result);
                     this.setState({
-                        items: result,
-                        itemsReceived: true,
+                        nameSortDirection: "none",
+                        surnameSortDirection: "none",
                     });
                 },
                 (error) => {
                     this.setState({
-                        itemsReceived: false,
+                        itemsReceived: true,
                     });
                 }
             )
     }
 
+    addItemsWithDelay(responseItems) {
+        let items = [];
+        for (let item in responseItems) {
+            setTimeout(function() {
+                items.push(responseItems[item]);
+                this.setState({
+                    items: items,
+                });
+            }.bind(this), 300 * item);
+        }
+        setTimeout(function() {
+            this.setState({
+                itemsReceived: true,
+            });
+        }.bind(this), 300 * responseItems.length);
+    }
+    
     componentDidMount() {
         this.requestData();
     }

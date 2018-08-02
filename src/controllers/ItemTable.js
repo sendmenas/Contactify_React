@@ -69,9 +69,9 @@ class ItemTable extends Component {
                     onClick={(data) => this.checkTarget(data)}
                     removeItem={(id) => this.props.remove(id)}
                     editItem={(item) => this.props.edit(item)}
-                />)
+                />)    
             }
-		});
+        });
 
         return (
             <table className="data-table">
