@@ -34,7 +34,7 @@ class HeaderAccountActions extends Component {
     }
     
     render() {
-        const rows = this.state.rows.map((row, index) => {
+        let rows = this.state.rows.map((row, index) => {
             return (
                 <Row
                     iconClass={row.iconClass}
@@ -44,7 +44,7 @@ class HeaderAccountActions extends Component {
             )
         })
 
-        const divStyle = {
+        let divStyle = {
             visibility: this.props.visibility ? 'visible' : 'hidden',
         }
 

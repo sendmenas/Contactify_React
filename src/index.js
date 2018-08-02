@@ -24,6 +24,8 @@ class App extends Component {
                 active: false,
                 id: null,
             },
+            nameSortDirection: "none",
+            surnameSortDirection: "none",
         }
     }
     
@@ -89,7 +91,7 @@ class App extends Component {
 
     updateItems(item) {
         if (item.id === null) {
-            const maxId = Math.max(...(this.state.items.map((item) => item.id)));
+            let maxId = Math.max(...(this.state.items.map((item) => item.id)));
             item.id = maxId + 1;
             this.state.items.push(item);
         } else {
@@ -114,8 +116,8 @@ class App extends Component {
     
     removeContractItem(id) {
         if (id !== null) {
-            const itemsArr = this.state.items.slice();
-            const itemIndex = this.state.items.findIndex((item) => item.id === id);
+            let itemsArr = this.state.items.slice();
+            let itemIndex = this.state.items.findIndex((item) => item.id === id);
             itemsArr.splice(itemIndex, 1);
             this.setState({
                 items: itemsArr,
@@ -171,11 +173,85 @@ class App extends Component {
         })
     }
 
+    sortByName() {
+        let items = this.state.items;
+        let currentSort = this.state.nameSortDirection;
+        if (currentSort === "none") {
+            currentSort = "desc";
+        } else if (currentSort === "asc") {
+            currentSort = "desc";
+        } else if (currentSort === "desc") {
+            currentSort = "asc";
+        }
+        if (items != null && items.length > 0) {
+            switch(currentSort) {
+                case "asc":
+                    items.sort(function(a, b) {
+                        return a.name < b.name;
+                    });
+                    break;
+                case "desc":
+                    items.sort(function(a, b) {
+                        return a.name > b.name;
+                    });
+                    break;
+                default:
+                    items.sort(function(a, b) {
+                        return a.name > b.name;
+                    });
+                    break;
+            }
+        }
+        this.setState({
+            items: items,
+            nameSortDirection: currentSort,
+            surnameSortDirection: "none",
+        });
+    }
+
+    sortBySurname() {
+        let items = this.state.items;
+        let currentSort = this.state.surnameSortDirection;
+        if (currentSort === "none") {
+            currentSort = "desc";
+        } else if (currentSort === "asc") {
+            currentSort = "desc";
+        } else if (currentSort === "desc") {
+            currentSort = "asc";
+        }
+        if (items != null && items.length > 0) {
+            switch(currentSort) {
+                case "asc":
+                    items.sort(function(a, b) {
+                        return a.surname < b.surname;
+                    });
+                    break;
+                case "desc":
+                    items.sort(function(a, b) {
+                        return a.surname > b.surname;
+                    });
+                    break;
+                default:
+                    items.sort(function(a, b) {
+                        return a.surname > b.surname;
+                    });
+                    break;
+            }
+        }
+        this.setState({
+            items: items,
+            surnameSortDirection: currentSort,
+            nameSortDirection: "none",
+        });
+    }
+
     render() {
         let isLoaded = this.state.itemsReceived;
         let items = this.state.items;
         let displayDialog = this.state.showContractDialog;
         let contractData = this.state.predefinedContractData;
+        let nameSortDirection = this.state.nameSortDirection;
+        let surnameSortDirection = this.state.surnameSortDirection;
 
         return (
             <div className='page'>
@@ -185,6 +261,10 @@ class App extends Component {
                     showContractDataDialogWithData={(data) => this.setContractDataAndShowDialog(data)}
                     items={items}
                     removeItem={(id) => this.removeContractItem(id)}
+                    nameSortDirection={nameSortDirection}
+                    surnameSortDirection={surnameSortDirection}
+                    sortByName={() => this.sortByName()}
+                    sortBySurname={() => this.sortBySurname()}
                 />
                 <Footer 
                     requestData={() => this.requestData()}

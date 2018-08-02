@@ -47,7 +47,7 @@ class HeaderMenu extends Component {
 
     render() {
 
-        const tabs = this.state.tabs.map((tab, index) => {
+        let tabs = this.state.tabs.map((tab, index) => {
             return (
                 <Tab 
                     isSelected={tab.isSelected}

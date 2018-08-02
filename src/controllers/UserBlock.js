@@ -3,7 +3,7 @@ import '../css/UserBlock.css';
 
 class UserBlock extends Component {
     render () {
-        const image = {backgroundImage: `url(${this.props.selectedItem.avatar})`};
+        let image = {backgroundImage: `url(${this.props.selectedItem.avatar})`};
         return (
             <aside className="user-block">
                 <div className="user-block__avatar" style={image}></div>

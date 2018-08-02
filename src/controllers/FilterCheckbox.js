@@ -7,7 +7,7 @@ class FilterCheckbox extends Component {
     }
 
     render() {
-        const checkBoxClass = this.props.active === false ?  "checkbox__input" : "checkbox__input checkbox__input--checked";
+        let checkBoxClass = this.props.active === false ?  "checkbox__input" : "checkbox__input checkbox__input--checked";
 
         return (
             <div className="checkbox">

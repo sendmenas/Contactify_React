@@ -23,15 +23,15 @@ class FilterDropdown extends Component {
     }
 
     toggleList() {
-        const visibile = this.state.dropdownVisibility === "hidden" ? "visible" : "hidden";
+        let visibile = this.state.dropdownVisibility === "hidden" ? "visible" : "hidden";
         this.setState({
             dropdownVisibility: visibile,
         });
     }
 
     render() {
-        const cityArr = [];
-        const dropdownList = [];
+        let cityArr = [];
+        let dropdownList = [];
         this.props.dataItems.forEach((item) => {
             if (cityArr.indexOf(item.city) === -1) {
                 cityArr.push(item.city);
@@ -43,9 +43,9 @@ class FilterDropdown extends Component {
             }
         });
 
-        const selectedCity = this.props.selectedCity === "" ? "City" : this.props.selectedCity;
+        let selectedCity = this.props.selectedCity === "" ? "City" : this.props.selectedCity;
 
-        const divStyle = {
+        let divStyle = {
             visibility: this.state.dropdownVisibility,
         }
 

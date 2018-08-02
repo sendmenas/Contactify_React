@@ -56,9 +56,9 @@ class Main extends Component {
 	}
 
 	filterItems() {
-		const city = this.state.selectedCity;
-		const name = this.state.nameFilterValue;
-		const active = this.state.activityFilter;
+		let city = this.state.selectedCity;
+		let name = this.state.nameFilterValue;
+		let active = this.state.activityFilter;
 		this.setState({
 			filterValues: {
 				selectedCity: city,
@@ -82,15 +82,18 @@ class Main extends Component {
 	}
 
 	addContract(data) {
-		const arr = this.props.items;
+		let arr = this.props.items;
 		arr.push(data);
 	}
 
 	render() {
-		const items = this.props.items;
-		const selectedContract = this.state.selectedContract;
-		const active = this.state.activityFilter;
-		const filterValues = this.state.filterValues;
+		let items = this.props.items;
+		let selectedContract = this.state.selectedContract;
+		let active = this.state.activityFilter;
+		let filterValues = this.state.filterValues;
+		let nameSortDirection = this.props.nameSortDirection;
+		let surnameSortDirection = this.props.surnameSortDirection;
+
 		return (
 			<main className="main">
 				<div className="main__filter">
@@ -124,9 +127,13 @@ class Main extends Component {
 					<ItemTable
 						filter={filterValues}
 						dataItems={items}
+						nameSortDirection={nameSortDirection}
+						surnameSortDirection={surnameSortDirection}
 						onClick={(contract) => this.setSelectedContract(contract)}
 						remove={(id) => this.props.removeItem(id)}
 						edit={(item) => this.props.showContractDataDialogWithData(item)}
+						sortByName={() => this.props.sortByName()}
+						sortBySurname={() => this.props.sortBySurname()}
 					/>
 				</div>
 			</main>

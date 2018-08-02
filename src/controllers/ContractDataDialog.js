@@ -27,18 +27,18 @@ class ContractDataDialog extends Component {
     }
 
     render() {
-        const dialogDisplayState = {
+        let dialogDisplayState = {
             display: this.props.displayDialog ? 'flex' : 'none',
         }
         
         let itemData = this.props.data;
 
-        const name = itemData.name === null ? "" : itemData.name; 
-        const surname = itemData.surname === null ? "" : itemData.surname; 
-        const avatar = itemData.avatar === null ? "" : itemData.avatar; 
-        const city = itemData.city === null ? "" : itemData.city; 
-        const email = itemData.email === null ? "" : itemData.email; 
-        const phone = itemData.phone === null ? "" : itemData.phone;
+        let name = itemData.name === null ? "" : itemData.name; 
+        let surname = itemData.surname === null ? "" : itemData.surname; 
+        let avatar = itemData.avatar === null ? "" : itemData.avatar; 
+        let city = itemData.city === null ? "" : itemData.city; 
+        let email = itemData.email === null ? "" : itemData.email; 
+        let phone = itemData.phone === null ? "" : itemData.phone;
         
         return(
             <dialog className="user-data-dialog" style={dialogDisplayState}>

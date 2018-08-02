@@ -32,8 +32,11 @@ class ItemTable extends Component {
     }
 
 	render() {
-        const filter = this.props.filter;
-        const items = [];
+        let nameSort = this.props.nameSortDirection  === "none" ? "sort-arrow-inactive" : this.props.nameSortDirection  === "asc" ? "sort-arrow-asc" : "sort-arrow-desc";
+        let surnameSort= this.props.surnameSortDirection  === "none" ? "sort-arrow-inactive" : this.props.surnameSortDirection  === "asc" ? "sort-arrow-asc" : "sort-arrow-desc";
+        let filter = this.props.filter;
+        let items = [];
+
         this.props.dataItems.forEach((item) => {
             let filterIndicators = [];
             if (filter.nameFilterValue !== "") {
@@ -76,11 +79,11 @@ class ItemTable extends Component {
                     <tr>
                         <th className="data-table__header__name">
                             <div>Name</div>
-                            <div className="sort-arrow-inactive"></div>
+                            <div className={nameSort} onClick={() => this.props.sortByName()}></div>
                         </th>
                         <th className="data-table__header__surname">
                             <div>Surname</div>
-                            <div className="sort-arrow-inactive"></div>
+                            <div className={surnameSort} onClick={() => this.props.sortBySurname()}></div>
                         </th>
                         <th className="data-table__header__city">City</th>
                         <th className="data-table__header__email">Email</th>
