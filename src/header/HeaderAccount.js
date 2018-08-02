@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/HeaderAccount.css';
+import './HeaderAccount.css';
 
 function Row(props) {
     return (

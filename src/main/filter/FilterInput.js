@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/FilterInput.css';
+import './FilterInput.css';
 
 const regEx = /[^a-zA-Z\s]/g;
 

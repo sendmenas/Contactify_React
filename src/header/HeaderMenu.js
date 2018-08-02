@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/HeaderMenu.css';
+import './HeaderMenu.css';
 
 function Tab(props) {
     return (

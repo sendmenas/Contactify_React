@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/Footer.css';
+import './Footer.css';
 
 function getFullNumberString(nr) {
     return nr < 10 ? "0" + nr : nr;

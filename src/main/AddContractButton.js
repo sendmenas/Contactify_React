@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/AddContractButton.css';
+import './AddContractButton.css';
 
 class AddContractButton extends Component {
     render() {

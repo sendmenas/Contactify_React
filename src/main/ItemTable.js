@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/ItemTable.css';
+import './ItemTable.css';
 
 
 function Item(props) {

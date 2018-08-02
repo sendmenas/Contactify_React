@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/ContractDataDialog.css'
+import './ContractDataDialog.css'
 
 class ContractDataDialog extends Component {
     constructor(props) {

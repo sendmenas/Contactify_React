@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/FilterCheckbox.css';
+import './FilterCheckbox.css';
 
 class FilterCheckbox extends Component {
     setActivitySelection(e) {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/FilterDropdown.css';
+import './FilterDropdown.css';
 
 function DropdownItem (props) {
     return (

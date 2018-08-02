@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/FilterButton.css';
+import './FilterButton.css';
 
 class FilterButton extends Component {
     render() {

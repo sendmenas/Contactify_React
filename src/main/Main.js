@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ItemTable from './ItemTable';
-import '../css/Main.css';
-import FilterInput from './FilterInput';
-import FilterDropdown from './FilterDropdown';
-import FilterCheckbox from './FilterCheckbox';
-import FilterButton from './FilterButton';
+import './Main.css';
+import FilterInput from './filter/FilterInput';
+import FilterDropdown from './filter/FilterDropdown';
+import FilterCheckbox from './filter/FilterCheckbox';
+import FilterButton from './filter/FilterButton';
 import AddContractButton from './AddContractButton';
 import UserBlock from './UserBlock';
 

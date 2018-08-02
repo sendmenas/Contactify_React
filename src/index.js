@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
-import Header from './controllers/Header';
-import Main from './controllers/Main';
-import Footer from './controllers/Footer';
-import ContractDataDialog from './controllers/ContractDataDialog';
+import './index.css';
+import Header from './header/Header';
+import Main from './main/Main';
+import Footer from './footer/Footer';
+import ContractDataDialog from './dialog/ContractDataDialog';
 import registerServiceWorker from './registerServiceWorker';
 
 class App extends Component {
